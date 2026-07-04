@@ -1,0 +1,22 @@
+﻿{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Exam Syllabus</h2>
+<div class="table-responsive">
+    <table class="table table-custom table-hover border">
+        <thead class="table-light">
+            <tr>
+                <th>Exam</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in syllabus_list %}
+            <tr>
+                <td class="fw-500">{{ item.title }}</td>
+                <td>{% if item.pdf %}<a href="{{ item.pdf.url }}" target="_blank" class="btn btn-sm btn-danger">PDF</a>{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row mb-5">
+    <div class="col-12 text-center py-5 bg-primary text-white rounded-4 shadow-lg mb-4">
+        <h1 class="display-4 fw-bold mb-3">Find Your Dream Government Job</h1>
+        <p class="lead mb-4">Stay ahead with the latest Sarkari Results, Admit Cards, and Job Notifications.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="{% url 'jobs:job_search' %}" method="GET">
+                    <div class="input-group input-group-lg shadow-sm">
+                        <input type="text" name="q" class="form-control border-0" placeholder="Search by Job, Organization, or Keywords...">
+                        <button class="btn btn-warning px-4" type="submit"><i class="fas fa-search me-2"></i>Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Navigation Cards -->
+<div class="row g-4 mb-5">
+    <div class="col-md-3">
+        <div class="card h-100 text-center border-0 shadow-sm bg-primary text-white p-3 position-relative">
+            <i class="fas fa-briefcase fa-3x mb-3"></i>
+            <h5>Latest Jobs</h5>
+            <a href="{% url 'jobs:job_list' %}" class="stretched-link"></a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card h-100 text-center border-0 shadow-sm bg-success text-white p-3 position-relative">
+            <i class="fas fa-poll fa-3x mb-3"></i>
+            <h5>Results</h5>
+            <a href="{% url 'results:result_list' %}" class="stretched-link"></a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card h-100 text-center border-0 shadow-sm bg-warning text-dark p-3 position-relative">
+            <i class="fas fa-id-card fa-3x mb-3"></i>
+            <h5>Admit Cards</h5>
+            <a href="{% url 'admitcards:admitcard_list' %}" class="stretched-link"></a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card h-100 text-center border-0 shadow-sm bg-info text-white p-3 position-relative">
+            <i class="fas fa-book fa-3x mb-3"></i>
+            <h5>Syllabus</h5>
+            <a href="{% url 'syllabus:syllabus_list' %}" class="stretched-link"></a>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content Grid -->
+<div class="row g-4">
+    <!-- Latest Notifications Column -->
+    <div class="col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-danger text-white fw-bold py-3">
+                <i class="fas fa-bell me-2"></i>LATEST NOTIFICATIONS
+            </div>
+            <div class="list-group list-group-flush scroll-section" style="max-height: 600px; overflow-y: auto;">
+                {% for job in latest_jobs %}
+                <a href="{% url 'jobs:job_detail' job.slug %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="small text-muted">{{ job.created_at|date:"d M" }}</span><br>
+                        <span class="fw-500">{{ job.title }}</span>
+                    </div>
+                    {% if job.is_trending %}
+                    <span class="badge bg-warning text-dark rounded-pill">New</span>
+                    {% endif %}
+                </a>
+                {% empty %}
+                <div class="p-4 text-center text-muted">No recent notifications.</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Results and Admit Cards Column -->
+    <div class="col-lg-4">
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-success text-white fw-bold py-3">
+                <i class="fas fa-poll me-2"></i>LATEST RESULTS
+            </div>
+            <div class="list-group list-group-flush">
+                {% for result in latest_results %}
+                <a href="{% url 'results:result_detail' result.slug %}" class="list-group-item list-group-item-action fw-500">
+                    {{ result.title }}
+                </a>
+                {% empty %}
+                <div class="p-4 text-center text-muted">No recent results.</div>
+                {% endfor %}
+            </div>
+            <div class="card-footer bg-white border-0 text-center">
+                <a href="{% url 'results:result_list' %}" class="btn btn-link btn-sm">View All Results</a>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-warning text-dark fw-bold py-3">
+                <i class="fas fa-id-card me-2"></i>ADMIT CARDS
+            </div>
+            <div class="list-group list-group-flush">
+                {% for card in latest_admit_cards %}
+                <a href="{% url 'admitcards:admitcard_detail' card.slug %}" class="list-group-item list-group-item-action fw-500">
+                    {{ card.title }}
+                </a>
+                {% empty %}
+                <div class="p-4 text-center text-muted">No recent admit cards.</div>
+                {% endfor %}
+            </div>
+            <div class="card-footer bg-white border-0 text-center">
+                <a href="{% url 'admitcards:admitcard_list' %}" class="btn btn-link btn-sm">View All Admit Cards</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- More Updates Column -->
+    <div class="col-lg-4">
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-info text-white fw-bold py-3">
+                <i class="fas fa-university me-2"></i>ADMISSIONS
+            </div>
+            <div class="list-group list-group-flush">
+                {% for adm in latest_admissions %}
+                <a href="{% url 'admissions:admission_list' %}" class="list-group-item list-group-item-action fw-500">
+                    {{ adm.title }}
+                </a>
+                {% empty %}
+                <div class="p-4 text-center text-muted">No recent admissions.</div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-secondary text-white fw-bold py-3">
+                <i class="fas fa-key me-2"></i>ANSWER KEYS
+            </div>
+            <div class="list-group list-group-flush">
+                {% for key in latest_answer_keys %}
+                <a href="{% url 'answerkeys:answerkey_list' %}" class="list-group-item list-group-item-action fw-500">
+                    {{ key.title }}
+                </a>
+                {% empty %}
+                <div class="p-4 text-center text-muted">No recent answer keys.</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Trending Jobs Section -->
+<div class="mt-5">
+    <h3 class="fw-bold mb-4 border-start border-primary border-4 ps-3">Trending Job Updates</h3>
+    <div class="row g-4">
+        {% for job in trending_jobs %}
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                <div class="card-body">
+                    <span class="badge bg-primary-subtle text-primary mb-2">{{ job.organization_name }}</span>
+                    <h6 class="card-title fw-bold mb-3">{{ job.title }}</h6>
+                    <p class="card-text small text-muted mb-3">{{ job.short_description|truncatechars:80 }}</p>
+                    <a href="{% url 'jobs:job_detail' job.slug %}" class="btn btn-outline-primary btn-sm w-100">Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

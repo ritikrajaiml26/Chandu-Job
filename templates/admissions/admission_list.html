@@ -1,0 +1,22 @@
+﻿{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Latest Admissions</h2>
+<div class="table-responsive">
+    <table class="table table-custom table-hover border">
+        <thead class="table-light">
+            <tr>
+                <th>Title</th>
+                <th>Last Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for adm in admissions %}
+            <tr>
+                <td class="fw-500">{{ adm.title }}</td>
+                <td><span class="badge bg-danger">{{ adm.last_date|date:"d M Y" }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+﻿{% extends 'base.html' %}
+{% block title %}Contact Us - {{ site_name }}{% endblock %}
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 p-4">
+            <h2 class="fw-bold mb-4">Get in Touch</h2>
+            <form action="." method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Subject</label>
+                    <input type="text" name="subject" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Message</label>
+                    <textarea name="message" class="form-control" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6 mt-4 mt-md-0">
+        <div class="card shadow-sm border-0 p-4 h-100">
+            <h2 class="fw-bold mb-4">Support Info</h2>
+            <p>If you have any queries regarding job notifications or results, feel free to contact us. We usually respond within 24-48 hours.</p>
+            <div class="mt-4">
+                <p><strong>Email:</strong> {{ contact_email }}</p>
+                <div class="d-flex gap-3 mt-3">
+                    <a href="{{ social_links.facebook }}" class="btn btn-outline-primary btn-sm"><i class="fab fa-facebook-f"></i></a>
+                    <a href="{{ social_links.twitter }}" class="btn btn-outline-info btn-sm"><i class="fab fa-twitter"></i></a>
+                    <a href="{{ social_links.telegram }}" class="btn btn-outline-secondary btn-sm"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

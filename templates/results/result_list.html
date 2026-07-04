@@ -1,0 +1,25 @@
+﻿{% extends 'base.html' %}
+{% block title %}Latest Results - {{ site_name }}{% endblock %}
+{% block content %}
+<h2 class="mb-4">Latest Government Results</h2>
+<div class="table-responsive">
+    <table class="table table-custom table-hover border">
+        <thead class="table-light">
+            <tr>
+                <th>Notification Title</th>
+                <th>Date</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td class="fw-500">{{ result.title }}</td>
+                <td>{{ result.published_at|date:"d M Y" }}</td>
+                <td><a href="{% url 'results:result_detail' result.slug %}" class="btn btn-outline-success btn-sm">View Result</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

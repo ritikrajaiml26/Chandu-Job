@@ -1,0 +1,12 @@
+﻿<div class="ticker-container">
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <span class="badge bg-danger me-2">LATEST</span>
+            <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+                {% block ticker_items %}
+                Welcome to {{ site_name }}! Stay updated with the latest government jobs, results, and admit cards.
+                {% endblock %}
+            </marquee>
+        </div>
+    </div>
+</div>

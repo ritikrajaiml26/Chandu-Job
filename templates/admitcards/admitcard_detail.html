@@ -1,0 +1,12 @@
+﻿{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow-sm border-0 p-4">
+    <h2 class="fw-bold text-warning mb-3">{{ admitcard.title }}</h2>
+    <p class="text-muted mb-4">Published on: {{ admitcard.published_at|date:"d M Y" }}</p>
+    <div class="mb-4">{{ admitcard.description|linebreaks }}</div>
+    <div class="d-grid gap-2">
+        <a href="{{ admitcard.download_link }}" target="_blank" class="btn btn-warning btn-lg">Go to Download Page</a>
+        {% if admitcard.pdf %}<a href="{{ admitcard.pdf.url }}" target="_blank" class="btn btn-outline-danger">Download PDF</a>{% endif %}
+    </div>
+</div>
+{% endblock %}
