@@ -1,10 +1,19 @@
-{% extends "admin/base.html" %}
-{% load static %}
+<!DOCTYPE html>
 
-{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Chandu Job Portal{% endblock %}
+<html lang="en-us" dir="ltr">
+<head>
+<title>Log in | Chandu Job Portal</title>
+<link rel="stylesheet" href="/static/admin/css/base.css">
 
-{% block extrastyle %}
-{{ block.super }}
+  <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
+  <script src="/static/admin/js/theme.js"></script>
+
+
+  <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -471,48 +480,25 @@ fieldset {
 .messagelist li.error   { background: rgba(239,68,68,0.09) !important;  color: #f87171 !important; border-color: rgba(239,68,68,0.22) !important; }
 .messagelist li.warning { background: rgba(245,158,11,0.09) !important;  color: #fbbf24 !important; border-color: rgba(245,158,11,0.22) !important; }
 
-/* --------------------------------────────────────────────────
-   LOGIN PAGE
- ───────────────────────────── */
-.login #header { display: none !important; }
-.login { background: var(--bg-root) !important; }
-.login #container {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    min-height: 100vh !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    border: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
+/* ─────────────────────────────
+   SEARCH BAR
+───────────────────────────── */
+#searchbar {
+    background: rgba(4,3,16,0.8) !important; border: 1px solid var(--border) !important;
+    border-radius: 9px !important; color: var(--text-1) !important; padding: 9px 14px !important;
+    font-size: 0.84rem !important; font-family: 'Inter', sans-serif !important; transition: all 0.2s !important;
 }
-.login #main {
-    background: transparent !important;
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    flex: 1 0 auto !important;
+#searchbar:focus { border-color: var(--primary-light) !important; box-shadow: 0 0 0 3px rgba(139,92,246,0.18) !important; outline: none !important; }
+#changelist-search input[type=submit] {
+    background: rgba(124,58,237,0.14) !important; border: 1px solid var(--border) !important;
+    color: var(--primary-light) !important; box-shadow: none !important; margin-left: 8px !important;
 }
-.login #content {
-    background: var(--bg-card) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 22px !important;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.6) !important;
-    width: 100% !important;
-    max-width: 420px !important;
-    padding: 44px !important;
-    box-sizing: border-box !important;
-}
-.login .form-row { grid-template-columns: 1fr !important; padding: 12px 0 !important; border: none !important; background: transparent !important; }
-.login .form-row label { display: block !important; margin-bottom: 7px !important; padding-top: 0 !important; }
-.login .form-row input { max-width: 100% !important; }
-.login .submit-row { padding: 20px 0 0 !important; border: none !important; background: transparent !important; border-radius: 0 !important; }
-.login input[type=submit] { width: 100% !important; padding: 12px !important; font-size: 0.92rem !important; }
-.login #footer { display: none !important; }{ background-color: #ffffff !important; color: #1e1b4b !important; }
+
+/* ─────────────────────────────
+   MISC
+───────────────────────────── */
+input[type=checkbox] { accent-color: var(--primary-light) !important; }
+select option { background-color: #ffffff !important; color: #1e1b4b !important; }
 .errornote { background: rgba(239,68,68,0.09) !important; border: 1px solid rgba(239,68,68,0.22) !important; color: #f87171 !important; border-radius: 10px !important; padding: 12px 16px !important; }
 .errorlist { color: #f87171 !important; font-size: 0.8rem !important; list-style: none !important; padding-left: 0 !important; margin-top: 4px !important; }
 .sorted { color: var(--primary-light) !important; }
@@ -551,11 +537,33 @@ fieldset {
 @keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 #content { animation: fadeSlide 0.3s ease !important; }
 </style>
-{% endblock %}
+<link rel="stylesheet" href="/static/admin/css/login.css">
 
-{% block branding %}
+
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" login"
+  data-admin-utc-offset="0">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+      <header id="header">
+        <div id="branding">
+        
 <h1 id="site-name">
-    <a href="{% url 'admin:index' %}">
+    <a href="/admin/">
         <span class="brand-logo"><i class="fa-solid fa-gauge-high"></i></span>
         <span>
             <span class="brand-name">Chandu Job Portal</span>
@@ -563,6 +571,74 @@ fieldset {
         </span>
     </a>
 </h1>
-{% endblock %}
 
-{% block nav-global %}{% endblock %}
+        </div>
+        
+        
+      </header>
+    
+    <!-- END Header -->
+    
+    
+
+    <div class="main" id="main">
+      
+        
+      
+      <main id="content-start" class="content" tabindex="-1">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colM">
+          
+          
+          
+          
+
+
+
+
+<div id="content-main">
+
+
+
+<form action="/admin/login/" method="post" id="login-form"><input type="hidden" name="csrfmiddlewaretoken" value="N7FOHJEqoUQi1alJaRKZioF0UqCr2VnaVByj58dN2BS2h1OwFcOAJlivNn2Irqi9">
+  <div class="form-row">
+    
+    <label for="id_username" class="required">Username:</label> <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+  </div>
+  <div class="form-row">
+    
+    <label for="id_password" class="required">Password:</label> <input type="password" name="password" autocomplete="current-password" required id="id_password">
+    <input type="hidden" name="next" value="/admin/">
+  </div>
+  
+  
+  <div class="submit-row">
+    <input type="submit" value="Log in">
+  </div>
+</form>
+
+</div>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+      </main>
+    </div>
+    <footer id="footer"></footer>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
+  <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
+  <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
+</svg>
+<!-- END SVGs -->
+
+</body>
+</html>

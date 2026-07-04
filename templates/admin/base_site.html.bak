@@ -471,7 +471,7 @@ fieldset {
 .messagelist li.error   { background: rgba(239,68,68,0.09) !important;  color: #f87171 !important; border-color: rgba(239,68,68,0.22) !important; }
 .messagelist li.warning { background: rgba(245,158,11,0.09) !important;  color: #fbbf24 !important; border-color: rgba(245,158,11,0.22) !important; }
 
-/* --------------------------------────────────────────────────
+/* ─�/* ─────────────────────────────
    LOGIN PAGE
  ───────────────────────────── */
 .login #header { display: none !important; }
